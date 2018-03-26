@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Configurar Partida - Naval Battle{% endblock title %}
+
+{% block content %}
+<p> Configuracion de Partida </p>
+{% if user.is_authenticated %}
+
+<form action="" method="POST">
+{{ form.as_p }}
+{% csrf_token %}
+<input value="Configuración lista" type="submit">
+</form>
+
+{% endif %}
+{% endblock%}
+{% block branding %}HOME{% endblock %}
+{% block userlinks %}"user"{% endblock%}

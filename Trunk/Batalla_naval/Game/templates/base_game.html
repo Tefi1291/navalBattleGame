@@ -1,0 +1,90 @@
+{% load admin_static %}{% load url from future %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
+<head>
+   <link rel="shortcut icon" href="{{ STATIC_URL }}/images/favicon.ico">
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <title>{% block title %}Batalla Naval{% endblock %}</title>
+   <meta name="keywords" content="" />
+   <meta name="description" content="" />
+   <link href="{{ STATIC_URL }}css/styles.css" rel="stylesheet" type="text/css" media="all" />
+   {% block refresh %}{% endblock %}
+</head>
+<body>
+<div id="logo-header">
+	<img src="{{ STATIC_URL }}images/bs_logo.png">
+</div>
+<div id="wrapper">
+	<div id="header">
+	</div>
+	<div id="menu">
+          <ul class="linklist">
+			<li><a href="/Game" accesskey="1" title="">|| Home  |</a></li>
+                        {% if user.is_authenticated %}
+                        {% block user %}
+
+                        <li>Bienvenido <span id="logged_in" style="font-weight:bold; color:#FF0000;">{{user.username}} </span></li>
+                        <li><a href="/Game/logout/" title="">|  Logout  |</a></li>
+                        <li><a href="/Game/change_pass/" title="">|  Cambiar contraseña  |</a></li>
+                        {% endblock user %}
+                        {% else %}
+                        {% block login %}
+                        <li><a href="/Game/register/" accesskey="4" title="" >|  Registrarse  |</a></li>
+                        <li><a href="/Game/login/" accesskey="2" title="">|  Log in  ||</a></li>
+                        {% endblock login %}
+                        {% endif %}
+          </ul>
+	</div>
+	<div id="page">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+    <table align="center" class="tableros">
+    <th><div id="tablerojugador">
+        <table class="tablero">
+            <tbody>
+            {% for row in tablero %}
+                  <tr>
+                  {% for item in row %}
+                    <td class="{{ item }}"/>
+                  {% endfor %}
+                  </tr>
+            {% endfor %}
+            <tbody>
+        </table>
+    </div></th>
+    <th><div id="tableroponente">
+        <table class="tablero">
+            <tbody>
+            {% for row in tablero_op %}
+                  <tr>
+                  {% for item in row %}
+                    <td class="{{ item }}"/>
+                  {% endfor %}
+                  </tr>
+            {% endfor %}
+            <tbody>
+        </table>
+    </div></th></td>
+                <div id="content">
+                        <div class="post">
+                          <table border=0 align="center">
+                            <tr>
+                              <td>
+                                {% block content %}
+                                {% endblock content %}
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div style="clear: both;"></div>
+                        </div><!-- end #content -->
+                <div style="clear: both;"></div>
+        </div>
+</div>
+{% block footer %}<div id="footer" align="right"><p>Copyright &copy; 2012 #TeamDexter</p></div>{% endblock footer %}
+</body>
+</html>

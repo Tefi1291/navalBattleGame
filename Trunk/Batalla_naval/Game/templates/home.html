@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Home - Naval Battle{% endblock title %}
+
+{% block content %}
+<p> BIENVENIDOS A LA BATALLA NAVAL </p>
+{% if user.is_authenticated %}
+<table border="3">
+<tr class="part-online">
+ <th>Partida</th>
+
+ <th>Jugadores</th>
+ <th>Estado</th>
+</tr>
+{% for item in partidas %}
+<tr>
+<td>
+    <a href="{% url partida item.id %}" accesskey="" title="" >{{item.nombre}}</a>
+</td>
+
+ <td><center>{{item.num_jugadores}} / {{item.max_jugadores}}</center></td>
+ <td>{% if item.num_jugadores < item.max_jugadores %}
+ 		<span style="font-weight:bold; color:green;"> Disponible </span>
+		{% else %}
+		<span style="font-weight:bold; color:red;"> Lleno </span>
+		{% endif %}</td>
+</tr>
+{%endfor%}
+</table>
+<br /><li><a href="/Game/crear_partida/" title="">Crear partida</a></li>
+{% endif %}
+{% endblock%}
+{% block branding %}HOME{% endblock %}
+{% block userlinks %}"user"{% endblock%}

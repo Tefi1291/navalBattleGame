@@ -1,0 +1,9 @@
+{% extends "base_game.html" %}
+{% block title %}Posicionar Flota - Naval Battle{% endblock title %}
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+<INPUT TYPE=submit value="Posicionar Barco">
+</form>
+{% endblock content%}

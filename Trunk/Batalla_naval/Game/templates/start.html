@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Comenzar a jugar - Naval Battle{% endblock title %}
+{% block content %}
+<p>Ingrese sus datos para unirse una partida: </p>
+<form action="" method="POST">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <INPUT TYPE=submit value=¡Unirme!>
+</form>
+{% endblock content %}
